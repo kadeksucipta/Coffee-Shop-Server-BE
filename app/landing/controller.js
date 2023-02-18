@@ -39,7 +39,7 @@ const store = async (req, res, next) => {
             let tmp_path = req.file.path;
             let originalExt = req.file.originalname.split(".")[req.file.originalname.split(".").length - 1];
             let filename = req.file.filename + "." + originalExt;
-            let target_path = path.resolve(config.rootPath, `public/images/${filename}`);
+            let target_path = path.resolve(config.rootPath, `public/images/landings/${filename}`);
 
             const src = fs.createReadStream(tmp_path);
             const dest = fs.createWriteStream(target_path);
@@ -122,7 +122,7 @@ const update = async (req, res, next) => {
             let tmp_path = req.file.path;
             let originalExt = req.file.originalname.split(".")[req.file.originalname.split(".").length - 1];
             let filename = req.file.filename + "." + originalExt;
-            let target_path = path.resolve(config.rootPath, `public/images/${filename}`);
+            let target_path = path.resolve(config.rootPath, `public/images/landings/${filename}`);
 
             const src = fs.createReadStream(tmp_path);
             const dest = fs.createWriteStream(target_path);
@@ -132,7 +132,7 @@ const update = async (req, res, next) => {
                 try {
 
                     let product = await Landing.findById(id);
-                    let currentImage = `${config.rootPath}/public/images/${product.image_url}`;
+                    let currentImage = `${config.rootPath}/public/images/landings/${product.image_url}`;
 
                     if(fs.existsSync(currentImage)) {
                         fs.unlinkSync(currentImage)
@@ -232,7 +232,7 @@ const index = async (req, res, next) => {
 const destroy = async (req, res, next) => {
     try {
         let product = await Landing.findByIdAndDelete(req.params.id);
-        let currentImage = `${config.rootPath}/public/images/${product.image_url}`;
+        let currentImage = `${config.rootPath}/public/images/landings/${product.image_url}`;
 
         if(fs.existsSync(currentImage)) {
             fs.unlinkSync(currentImage)
